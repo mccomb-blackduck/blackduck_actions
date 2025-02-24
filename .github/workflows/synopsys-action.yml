@@ -38,8 +38,8 @@ jobs:
         bash detect10.sh \ 
           --blackduck.url=$BLACKDUCK_URL \
           --blackduck.api.token=$BLACKDUCK_API_TOKEN \
-          --detect.project.name=$PROJECT_NAME \
-          --detect.project.version.name=$VERSION_NAME \
+          --detect.project.name=Daniel_Github_Actions \
+          --detect.project.version.name=1.0 \
           --detect.code.location.name=testbdionametesting \
           --detect.bdio.output.path=. \
           --detect.bdio.file.name=test-raks
