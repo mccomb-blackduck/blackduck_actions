@@ -23,7 +23,7 @@ jobs:
           BLACKDUCK_TRUST_CERT: true
           DETECT_DETECTOR_SEARCH_DEPTH: 15
           DETECT_CODE_LOCATION_NAME: testbdionametesting
-          BRIDGE_DETECT_ARGS=--detect.bdio.file.name=test
+          BRIDGE_DETECT_ARGS: --detect.bdio.file.name=DanielBDTEst 
           
         with:
           ### SCANNING: Required fields
