@@ -26,7 +26,7 @@ jobs:
           DETECT_BLACKDUCK_SIGNATURE_SCANNER_SNIPPET_MATCHING: SNIPPET_MATCHING
           BLACKDUCK_TRUST_CERT: true
           DETECT_DETECTOR_SEARCH_DEPTH: 15
-          DETECT_BDIO_FILE_NAME: test-raks
+          DETECT_BDIO_FILE_NAME: "test-raks"
           DETECT_CODE_LOCATION_NAME: testbdionametesting
           
         with:
