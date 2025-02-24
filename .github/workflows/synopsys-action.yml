@@ -20,7 +20,7 @@ jobs:
         java-version: '11'
 
     - name: Install Detect script
-      run: curl -s -L https://detect.blackduck.com/detect.sh -o detect.sh
+      run: curl -s -L https://detect.synopsys.com/detect.sh -o detect.sh
 
     - name: Run Black Duck Detect for Rapid Upload
       env:
