@@ -26,7 +26,7 @@ jobs:
           
           ### Arbitrary product-related CL arguments
           # detect_search_depth: 2
-          detect_args: '--detect.bido.file.name=DanielBDIOTest'
+          detect_args: '--detect.bdio.file.name=DanielBDIOTest'
           # detect_config_path: '/Users/Config/application.properties'
         with:
           ### SCANNING: Required fields
