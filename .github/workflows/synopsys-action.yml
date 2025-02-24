@@ -21,12 +21,12 @@ jobs:
 
     - name: Install Detect script
       run: |
-        curl -s -L https://detect.synopsys.com/detect.sh -o detect.sh  # Updated URL
-        cat detect.sh  # Add this line to print the content of the downloaded script
+        curl -s -L https://detect.blackduck.com/detect10.sh -o detect10.sh  # Updated URL
+        cat detect10.sh  # Add this line to print the content of the downloaded script
 
     - name: Verify Detect script
       run: |
-        file detect.sh  # Verify the file type
+        file detect10.sh  # Verify the file type
 
     - name: Run Black Duck Detect for Rapid Upload
       env:
@@ -35,7 +35,7 @@ jobs:
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
         VERSION_NAME: ${{ secrets.VERSION_NAME }}
       run: |
-        bash detect.sh 
+        bash detect10.sh \ 
           --blackduck.url=$BLACKDUCK_URL \
           --blackduck.api.token=$BLACKDUCK_API_TOKEN \
           --detect.project.name="$PROJECT_NAME" \
