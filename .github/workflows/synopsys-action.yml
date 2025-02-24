@@ -1,31 +1,51 @@
-name: Black Duck Security Scan
-
+name: CI-BlackDuck-SCA-Basic
 on:
   push:
-    branches:
-      - main
+    branches: [ main, master, develop, stage, release ]
   pull_request:
-
+    branches: [ main, master, develop, stage, release ]
+  workflow_dispatch:
+    
 jobs:
-  blackduck_sca_scan:
-    runs-on: ubuntu-latest
-
+  build:
+    runs-on: [ ubuntu-latest ]
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up Java (Required for Synopsys Detect)
-        uses: actions/setup-java@v3
+      - name: Checkout Source
+        uses: actions/checkout@v3
+      - name: Black Duck SCA Scan
+        uses: blackduck-inc/black-duck-security-scan@v2.0.0
+        
+        ### Configure DETECT environment variables
+        env:
+          DETECT_PROJECT_NAME: Daniel-SCA-Test
+          DETECT_PROJECT_VERSION_NAME: 1.0
+          #DETECT_PROJECT_NAME: ${{ github.event.repository.name }}
+          #DETECT_SOURCE_PATH: ${{ github.workspace }}
+          ##DETECT_BLACKDUCK_RAPID_COMPARE_MODE: BOM_COMPARE
+          ##DETECT_BLACKDUCK_SIGNATURE_SCANNER_UPLOAD_SOURCE_MODE: true
+          DETECT_BLACKDUCK_SIGNATURE_SCANNER_SNIPPET_MATCHING: SNIPPET_MATCHING
+          BLACKDUCK_TRUST_CERT: true
+          DETECT_DETECTOR_SEARCH_DEPTH: 15
+          
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          ### SCANNING: Required fields
+          blackducksca_url: ${{ secrets.BLACKDUCK_URL }}
+          blackducksca_token: ${{ secrets.BLACKDUCK_API_TOKEN }}
+          blackducksca_scan_full: true
+         
+          ### SCANNING: Optional fields
+          #blackducksca_scan_failure_severities: 'BLOCKER,CRITICAL'
+          
+          ### FIX PULL REQUEST CREATION: Uncomment below to enable
+          #blackducksca_fixpr_enabled: true
+          #blackducksca_prcomment_enabled: true 
+          # github_token: ${{ secrets.GITHUB_TOKEN }} # Required when Fix PRs is enabled
+          
+          ### PULL REQUEST COMMENTS: Uncomment below to enable
+          # blackducksca_prcomment_enabled: true 
+          ## github_token: ${{ secrets.MY_GITHUB_TOKEN }} # Required when PR comments is enabled
 
-      - name: Run Black Duck Security Scan
-        run: |
-          bash <(curl -s https://detect.blackduck.com/detect.sh) \
-            --blackduck.url="${{ secrets.BLACKDUCK_URL }}" \
-            --blackduck.api.token="${{ secrets.BLACKDUCK_API_TOKEN }}" \
-            --detect.project.name="Daniel_Github_Actions" \
-            --detect.project.version.name="1.0.0" \
-            --detect.code.location.name="MyProject-Scan" 
-
+          ### SARIF report generation and upload to GitHub Adavanced Security: Uncomment below to enable
+          # blackducksca_reports_sarif_create: true # Create Black Duck SCA SARIF report and upload it as artifact
+          # blackducksca_upload_sarif_report: true  # Upload Black Duck SCA SARIF report in GitHub Advanced Security tab
+          # github_token: ${{ secrets.GITHUB_TOKEN }} # Required when blackducksca_upload_sarif_report is set as true
