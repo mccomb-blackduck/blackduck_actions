@@ -35,7 +35,7 @@ jobs:
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
         VERSION_NAME: ${{ secrets.VERSION_NAME }}
       run: |
-        bash detect.sh \
+        bash detect.sh 
           --blackduck.url=$BLACKDUCK_URL \
           --blackduck.api.token=$BLACKDUCK_API_TOKEN \
           --detect.project.name="$PROJECT_NAME" \
