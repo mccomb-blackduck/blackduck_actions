@@ -1,45 +1,31 @@
-name: Black Duck Rapid Upload
+name: Black Duck Security Scan
 
 on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
-  blackduck-rapid-upload:
+  blackduck_sca_scan:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Set up Java
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'temurin'  # Specify the Java distribution (e.g., adopt, zulu, temurin)
-        java-version: '11'
+      - name: Set up Java (Required for Synopsys Detect)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-    - name: Install Detect script
-      run: |
-        curl -s -L https://detect.blackduck.com/detect10.sh -o detect10.sh  # Updated URL
-        cat detect10.sh  # Add this line to print the content of the downloaded script
+      - name: Run Black Duck Security Scan
+        run: |
+          bash <(curl -s https://detect.blackduck.com/detect.sh) \
+            --blackduck.url="${{ secrets.BLACKDUCK_URL }}" \
+            --blackduck.api.token="${{ secrets.BLACKDUCK_API_TOKEN }}" \
+            --detect.project.name="Daniel_Github_Actions" \
+            --detect.project.version.name="1.0.0" \
+            --detect.code.location.name="MyProject-Scan" 
 
-    - name: Verify Detect script
-      run: |
-        file detect10.sh  # Verify the file type
-
-    - name: Run Black Duck Detect for Rapid Upload
-      env:
-        BLACKDUCK_URL: ${{ secrets.BLACKDUCK_URL }}
-        BLACKDUCK_API_TOKEN: ${{ secrets.BLACKDUCK_API_TOKEN }}
-        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-        VERSION_NAME: ${{ secrets.VERSION_NAME }}
-      run: |
-        bash detect10.sh \ 
-          --blackduck.url=$BLACKDUCK_URL \
-          --blackduck.api.token=$BLACKDUCK_API_TOKEN \
-          --detect.project.name=Daniel_Github_Actions \
-          --detect.project.version.name=1.0 \
-          --detect.code.location.name=testbdionametesting \
-          --detect.bdio.output.path=. \
-          --detect.bdio.file.name=test-raks
