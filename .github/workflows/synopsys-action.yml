@@ -22,9 +22,12 @@ jobs:
           DETECT_BLACKDUCK_SIGNATURE_SCANNER_SNIPPET_MATCHING: SNIPPET_MATCHING
           BLACKDUCK_TRUST_CERT: true
           DETECT_DETECTOR_SEARCH_DEPTH: 15
-          DETECT_BDIO_FILE_NAME: 'test-raks'
           DETECT_CODE_LOCATION_NAME: testbdionametesting
           
+          ### Arbitrary product-related CL arguments
+          # detect_search_depth: 2
+          detect_args: '--detect.bido.file.name=DanielBDIOTest'
+          # detect_config_path: '/Users/Config/application.properties'
         with:
           ### SCANNING: Required fields
           blackducksca_url: ${{ secrets.BLACKDUCK_URL }}
