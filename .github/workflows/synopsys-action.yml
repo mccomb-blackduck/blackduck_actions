@@ -21,7 +21,7 @@ jobs:
 
     - name: Install Detect script
       run: |
-        curl -s -L https://detect.blackduck.com/detect.sh -o detect.sh
+        curl -s -L https://detect.synopsys.com/detect.sh -o detect.sh  # Updated URL
         cat detect.sh  # Add this line to print the content of the downloaded script
 
     - name: Verify Detect script
