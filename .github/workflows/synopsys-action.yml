@@ -17,7 +17,7 @@ jobs:
         
         ### Configure DETECT environment variables
         env:
-          DETECT_PROJECT_NAME: Daniel-Policy-Check
+          DETECT_PROJECT_NAME: Daniel-Policy-Check-Test
           DETECT_PROJECT_VERSION_NAME: 2.0
           DETECT_BLACKDUCK_SIGNATURE_SCANNER_SNIPPET_MATCHING: SNIPPET_MATCHING
           BLACKDUCK_TRUST_CERT: true
