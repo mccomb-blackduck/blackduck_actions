@@ -24,6 +24,7 @@ jobs:
           DETECT_DETECTOR_SEARCH_DEPTH: 15
           DETECT_CODE_LOCATION_NAME: testbdionametesting
           BRIDGE_DETECT_ARGS: --detect.bdio.file.name=DanielBDTEst 
+          DETECT_BLACKDUCK_SCAN_MODE: RAPID
           
         with:
           ### SCANNING: Required fields
