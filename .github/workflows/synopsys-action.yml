@@ -23,7 +23,7 @@ jobs:
           BLACKDUCK_TRUST_CERT: true
           DETECT_DETECTOR_SEARCH_DEPTH: 15
           DETECT_CODE_LOCATION_NAME: daniel_policy
-          BRIDGE_DETECT_ARGS: --detect.bdio.file.name=DanielBDTEst
+          BRIDGE_DETECT_ARGS: --detect.bdio.file.name=DanielBDTEst --detect.blackduck.scan.mode=RAPID
           
         with:
           ### SCANNING: Required fields
