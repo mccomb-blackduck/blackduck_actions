@@ -18,12 +18,12 @@ jobs:
         ### Configure DETECT environment variables
         env:
           DETECT_PROJECT_NAME: Daniel-SCA-Test
-          DETECT_PROJECT_VERSION_NAME: 1.0
+          DETECT_PROJECT_VERSION_NAME: 2.0
           DETECT_BLACKDUCK_SIGNATURE_SCANNER_SNIPPET_MATCHING: SNIPPET_MATCHING
           BLACKDUCK_TRUST_CERT: true
           DETECT_DETECTOR_SEARCH_DEPTH: 15
           DETECT_CODE_LOCATION_NAME: testbdionametesting
-          BRIDGE_DETECT_ARGS: --detect.bdio.file.name=DanielBDTEst --detect.blackduck.scan.mode=RAPID
+          BRIDGE_DETECT_ARGS: --detect.bdio.file.name=DanielBDTEst
           
         with:
           ### SCANNING: Required fields
