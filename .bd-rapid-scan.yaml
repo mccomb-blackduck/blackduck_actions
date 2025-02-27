@@ -1,0 +1,7 @@
+version: 1.0
+policy:
+  overrides:
+  - policyName: High Severity Security Policy Rule
+    components:
+    - name: Apache Tomcat
+      version: 10.1.24
