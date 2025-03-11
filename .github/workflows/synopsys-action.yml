@@ -34,6 +34,7 @@ jobs:
             DETECT_PROJECT_NAME: test-Daniel
             DETECT_PROJECT_VERSION_NAME: PR-TEST
             BRIDGE_BLACKDUCKSCA_FIXPR_ENABLED: true
+            DETECT_EXCLUDED_DETECTOR_TYPES: NPM
             
         with:
           blackducksca_url: ${{ secrets.BLACKDUCK_URL }}
