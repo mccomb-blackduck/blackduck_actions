@@ -35,7 +35,7 @@ jobs:
             DETECT_PROJECT_VERSION_NAME: PR-TEST
             BRIDGE_BLACKDUCKSCA_FIXPR_ENABLED: true
             DETECT_EXCLUDED_DETECTOR_TYPES: NPM
-            DETECT_TRUST_CERT: true
+            BLACKDUCK_TRUST_CERT: true
             
         with:
           blackducksca_url: ${{ secrets.BLACKDUCK_URL }}
