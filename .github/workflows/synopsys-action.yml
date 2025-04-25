@@ -1,36 +1,37 @@
-name: CI-BlackDuck-SCA-Basic
-on:
-  push:
-    branches: [ main, master, develop, stage, release ]
-  pull_request:
-    branches: [ main, master, develop, stage, release ]
-  workflow_dispatch:
+name: Rapid scan test
 
-jobs:
+on:
+   workflow_dispatch:
+     
+jobs: 
 
   rapid_scan:
     runs-on: [ small ]
     strategy:
       matrix:
         node-version: [20.x]
-
-  build:
-    runs-on: [ ubuntu-latest ]
-    needs: [Rapid-Scan]
+        
+  #  needs: [Rapid-Scan]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
+        with:
+           always-auth: true
+           registry-url: 'https://artifacts.i.mercedes-benz.com/artifactory/api/npm/switch-main-npm-releases/'
+           scope: '@mercedes-benz'
+           node-version: ${{ matrix.node-version }}
+           cache: 'npm' 
          
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
-	
-      - name: Set up Java 11
-        uses: actions/setup-java@v2
+        run : npm install --legacy-peer-deps
+        
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
         with:
-          java-version: '11'
-          distribution: 'adopt'
-            
+         java-version: '11'
+         distribution: 'temurin' 
+
       - name: Black Duck Scan
         uses: blackduck-inc/black-duck-security-scan@v2.1.0
         env:
@@ -46,3 +47,8 @@ jobs:
           blackducksca_scan_failure_severities: BLOCKER,CRITICAL,MAJOR
           mark_build_status: success
           blackducksca_fixpr_useUpgradeGuidance: SHORT_TERM,LONG_TERM
+
+           
+    
+           
+        
